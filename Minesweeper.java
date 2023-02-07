@@ -164,17 +164,21 @@ public class Minesweeper {
       int row = sc.nextInt();
       System.out.print("Enter col: ");
       int col = sc.nextInt();
-      if (mines[row][col]) {
-        printBoard();
-        System.out.println("You lost!");
-        break;
-      } else {
-        reveal(row, col);
-        if (checkWin()) {
+      try {
+        if (mines[row][col]) {
           printBoard();
-          System.out.println("You won!");
+          System.out.println("You lost!");
           break;
+        } else {
+          reveal(row, col);
+          if (checkWin()) {
+            printBoard();
+            System.out.println("You won!");
+            break;
+          }
         }
+      } catch (ArrayIndexOutOfBoundsException e) {
+        System.out.println("Invalid coordinates!");
       }
     }
   }
